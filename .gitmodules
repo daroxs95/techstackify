@@ -1,0 +1,3 @@
+[submodule "src/decss"]
+	path = src/decss
+	url = https://github.com/daroxs95/decss
