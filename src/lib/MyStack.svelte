@@ -25,6 +25,7 @@
 <fieldset class="hstack">
   <div class="hstack f-ai-center m-0">
     <label for="bgcolor">Bg color:</label>
+    <input id="bgcolor" bind:value={bgColor} placeholder={bgColor} />
     <input
       id="bgcolor"
       type="color"
@@ -36,18 +37,22 @@
 </fieldset>
 
 <div
-  class="hstack f-wrap border-1 gen-stack f-ai-center f-jc-center"
+  class="gen-stack hstack f-wrap border-1 f-ai-center f-jc-center"
   style={getStyleString(styles)}
 >
-  {#each myStack as tech}
-    <li>
-      <StackItem {tech} iconSize={iconsSize} />
-    </li>
-  {/each}
+  <ul class="hstack f-wrap f-ai-center f-jc-center">
+    {#each myStack as tech}
+      <li>
+        <StackItem {tech} iconSize={iconsSize} />
+      </li>
+    {/each}
+  </ul>
 </div>
 
 <style>
   .gen-stack {
+    resize: vertical;
+    overflow: auto;
     min-height: 200px;
     padding: 10px;
     border-color: var(--app-bg-dark);
