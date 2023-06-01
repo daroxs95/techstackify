@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: ['master']
 
+concurrency:
+  group: CI
+  cancel-in-progress: true
+
 jobs:
   surge-deploy:
     name: Deploy to surge.sh
