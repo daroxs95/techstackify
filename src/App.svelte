@@ -1,6 +1,7 @@
 <script lang="ts">
   import logo from "./assets/teckstackify.svg";
-  import Counter from "./lib/Counter.svelte";
+  import MyStack from "./lib/MyStack.svelte";
+  import StackBuilder from "./lib/StackBuilder.svelte";
 </script>
 
 <nav>
@@ -12,7 +13,8 @@
 </nav>
 
 <main class="content-centered p-def">
-  <Counter />
+  <MyStack />
+  <StackBuilder />
 </main>
 
 <footer class="vstack">

@@ -21,7 +21,7 @@ jobs:
           cache: 'yarn'
       - run: yarn
       - run: yarn build
-      - name: Deploy to decms.surge.sh
+      - name: Deploy to techstackify.surge.sh
         uses: dswistowski/surge-sh-action@v1
         with:
           domain: 'techstackify.surge.sh'
