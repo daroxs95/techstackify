@@ -49,8 +49,8 @@
   onDestroy(unsubscribe);
 </script>
 
-<fieldset class="hstack">
-  <div class="hstack f-ai-center m-0">
+<fieldset class="hstack f-wrap">
+  <div class="hstack f-ai-center m-0 f-wrap">
     <label for="bgcolor">Bg color:</label>
     <input id="bgcolor" bind:value={bgColor} placeholder={bgColor} />
     <input
@@ -60,9 +60,11 @@
       placeholder={bgColor}
     />
   </div>
-  <button class="outline" on:click={clearTechStack}>Clean stack</button>
-  <!-- <button class="outline" on:click={renderBanner}>Get</button> -->
-  <button class="outline" on:click={copyHtml}>Copy raw html</button>
+  <div class="hstack m-0 f-wrap">
+    <button class="outline" on:click={clearTechStack}>Clean stack</button>
+    <!-- <button class="outline" on:click={renderBanner}>Get</button> -->
+    <button class="outline" on:click={copyHtml}>Copy raw html</button>
+  </div>
 </fieldset>
 
 <div
