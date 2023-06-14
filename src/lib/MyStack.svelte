@@ -6,7 +6,7 @@
   import StackItem from "./StackItem.svelte";
 
   export let iconsSize: number = 80;
-  export let gap: string = "0px";
+  export let gap: string = "10px";
 
   let bgColor: string = "transparent";
   let myStack: Icon[] = [];
@@ -14,7 +14,6 @@
   // The styles needs to be inline to have them on copied html
   $: styles = {
     "background-color": bgColor,
-    gap,
     resize: "vertical",
     overflow: "auto",
     "min-height": "200px",
@@ -25,6 +24,7 @@
     "justify-content": "center",
   };
   const ulStyles = {
+    gap,
     margin: 0,
     display: "flex",
     "flex-wrap": "wrap",
@@ -82,5 +82,6 @@
 <style>
   .gen-stack {
     border-color: var(--app-bg-dark);
+    margin-bottom: var(--h-gap);
   }
 </style>

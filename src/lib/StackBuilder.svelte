@@ -41,7 +41,7 @@
     {/if}
   </form>
 
-  <div class="hstack f-wrap">
+  <div class="hstack f-wrap f-ai-center f-jc-center">
     {#each filteredTechs as tech}
       <li>
         <StackItem
