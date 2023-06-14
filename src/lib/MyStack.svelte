@@ -6,14 +6,41 @@
   import StackItem from "./StackItem.svelte";
 
   export let iconsSize: number = 80;
-  export let gap: string = "";
+  export let gap: string = "0px";
 
-  let bgColor: string = "white";
+  let bgColor: string = "transparent";
   let myStack: Icon[] = [];
 
+  // The styles needs to be inline to have them on copied html
   $: styles = {
     "background-color": bgColor,
     gap,
+    resize: "vertical",
+    overflow: "auto",
+    "min-height": "200px",
+    padding: "10px",
+    display: "flex",
+    "flex-wrap": "wrap",
+    "align-items": "center",
+    "justify-content": "center",
+  };
+  const ulStyles = {
+    margin: 0,
+    display: "flex",
+    "flex-wrap": "wrap",
+    "align-items": "center",
+    "justify-content": "center",
+    "list-style": "none",
+  };
+
+  const renderBanner = () => {};
+
+  const copyHtml = () => {
+    var node = document.getElementById("techstackify");
+    navigator.clipboard
+      .writeText(node?.outerHTML)
+      .then(() => alert("Html copied to clipboard"))
+      .catch(() => alert("Sorry, could'nt copy html to clipboard"));
   };
 
   const unsubscribe = selectedStack.subscribe((value) => {
@@ -34,13 +61,16 @@
     />
   </div>
   <button class="outline" on:click={clearTechStack}>Clean stack</button>
+  <!-- <button class="outline" on:click={renderBanner}>Get</button> -->
+  <button class="outline" on:click={copyHtml}>Copy raw html</button>
 </fieldset>
 
 <div
-  class="gen-stack hstack f-wrap border-1 f-ai-center f-jc-center"
+  id="techstackify"
+  class="gen-stack border-1"
   style={getStyleString(styles)}
 >
-  <ul class="hstack f-wrap f-ai-center f-jc-center">
+  <ul style={getStyleString(ulStyles)}>
     {#each myStack as tech}
       <li>
         <StackItem {tech} iconSize={iconsSize} />
@@ -51,10 +81,6 @@
 
 <style>
   .gen-stack {
-    resize: vertical;
-    overflow: auto;
-    min-height: 200px;
-    padding: 10px;
     border-color: var(--app-bg-dark);
   }
 </style>

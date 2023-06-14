@@ -9,8 +9,12 @@
   export let tech: Icon;
   export let isSelected: boolean = false;
 
+  // The styles needs to be inline to have them on copied html
   $: styles = {
     "border-color": !isSelected && "transparent",
+  };
+  const imgStyles = {
+    "aspect-ratio": "1",
   };
 </script>
 
@@ -24,5 +28,6 @@
     src={getSvgUrl(tech, tech.versions.svg[0])}
     alt={tech.name}
     width={iconSize}
+    style={getStyleString(imgStyles)}
   />
 </div>
