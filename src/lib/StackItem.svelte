@@ -1,12 +1,12 @@
 <script lang="ts">
-  import type { Icon } from "./modules/TechIcons/types";
+  import type { SelectedIcon } from "./modules/TechIcons/types";
   import { toggleTechStackItem } from "../store/techStach";
   import { getSvgUrl } from "./modules/TechIcons/utils";
   import { getStyleString } from "../utils/styles";
 
   export let iconSize: number = 60;
   export let className: string = "";
-  export let tech: Icon;
+  export let tech: SelectedIcon;
   export let isSelected: boolean = false;
 
   // The styles needs to be inline to have them on copied html
@@ -25,9 +25,10 @@
 >
   <img
     title={tech.name}
-    src={getSvgUrl(tech, tech.versions.svg[0])}
+    src={getSvgUrl(tech)}
     alt={tech.name}
     width={iconSize}
+    height={iconSize}
     style={getStyleString(imgStyles)}
   />
 </div>

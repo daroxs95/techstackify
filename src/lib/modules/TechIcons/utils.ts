@@ -1,6 +1,6 @@
 import { DEVICONS_BASE_URL } from "./constants";
-import type { Icon } from "./types";
+import type { SelectedIcon } from "./types";
 
-export function getSvgUrl(icon: Icon, version: string) {
-  return `${DEVICONS_BASE_URL}/icons/${icon.name}/${icon.name}-${version}.svg`;
+export function getSvgUrl(icon: SelectedIcon) {
+  return `${DEVICONS_BASE_URL}/icons/${icon.name}/${icon.name}-${icon.selectedVersion}.svg`;
 }

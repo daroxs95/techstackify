@@ -1,10 +1,10 @@
 import { writable } from "svelte/store";
-import type { Icon } from "../lib/modules/TechIcons/types";
+import type { SelectedIcon } from "../lib/modules/TechIcons/types";
 import Logger from "../utils/logger";
 
-export const selectedStack = writable<Icon[]>(getSavedStack());
+export const selectedStack = writable<SelectedIcon[]>(getSavedStack());
 
-export function addTechStackItem(data: Icon) {
+export function addTechStackItem(data: SelectedIcon) {
   const newRequest = data;
   selectedStack.update(() => addTechItemToSavedStack(newRequest));
 }
@@ -18,7 +18,7 @@ export function deleteTechStackItemByName(name: string) {
   });
 }
 
-export function toggleTechStackItem(item: Icon) {
+export function toggleTechStackItem(item: SelectedIcon) {
   selectedStack.update((prevItems) => {
     const items = prevItems || [];
     const index = items.findIndex((i) => i.name === item.name);
@@ -35,7 +35,7 @@ export function clearTechStack() {
 }
 
 // Local storage logic
-function getSavedStack(): Icon[] {
+function getSavedStack(): SelectedIcon[] {
   let list = [];
   try {
     list = JSON.parse(localStorage.getItem("myteckstack"));
@@ -45,11 +45,11 @@ function getSavedStack(): Icon[] {
   return list;
 }
 
-export function setSavedStack(list: Icon[]) {
+export function setSavedStack(list: SelectedIcon[]) {
   localStorage.setItem("myteckstack", JSON.stringify(list));
 }
 
-export function addTechItemToSavedStack(item: Icon) {
+export function addTechItemToSavedStack(item: SelectedIcon) {
   const list = getSavedStack() || [];
   const indexOfEquivalentItem = list.findIndex((i) => i.name === item.name);
   if (indexOfEquivalentItem === -1) {

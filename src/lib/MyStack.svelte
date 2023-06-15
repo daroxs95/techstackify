@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Icon } from "./modules/TechIcons/types";
+  import type { SelectedIcon } from "./modules/TechIcons/types";
   import { clearTechStack, selectedStack } from "../store/techStach";
   import { onDestroy } from "svelte";
   import { getStyleString } from "../utils/styles";
@@ -9,7 +9,7 @@
 
   let bgColor: string = "transparent";
   let iconsSize: number = 80;
-  let myStack: Icon[] = [];
+  let myStack: SelectedIcon[] = [];
 
   // The styles needs to be inline to have them on copied html
   $: styles = {
@@ -65,6 +65,7 @@
     />
   </fieldset>
   <fieldset>
+    <label for="bgcolor">Icon size:</label>
     <input
       id="icon-size"
       bind:value={iconsSize}
