@@ -2,6 +2,7 @@
   import logo from "./assets/teckstackify.svg";
   import MyStack from "./lib/MyStack.svelte";
   import StackBuilder from "./lib/StackBuilder.svelte";
+  import Footer from "./lib/modules/Footer/Footer.svelte";
 </script>
 
 <nav>
@@ -17,30 +18,9 @@
   <StackBuilder />
 </main>
 
-<footer class="vstack">
-  <div class="hstack f-jc-center">
-    <a
-      href="https://github.com/daroxs95/techstackify"
-      target="_blank"
-      title="Github"
-    >
-      <i class="fa-brands fa-github font-icon-button" />
-    </a>
-  </div>
-  <!-- <div>
-    &copy; {today.getFullYear()}
-    {MY_NAME}. Maybe some rights reserved.
-  </div> -->
-</footer>
+<Footer />
 
 <style>
-  footer {
-    padding: 40px 25px;
-    text-align: center;
-  }
-  .font-icon-button {
-    font-size: 40px;
-  }
   main {
     min-height: 100vh;
   }
