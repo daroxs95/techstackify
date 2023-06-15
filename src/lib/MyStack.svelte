@@ -5,16 +5,15 @@
   import { getStyleString } from "../utils/styles";
   import StackItem from "./StackItem.svelte";
 
-  export let iconsSize: number = 80;
   export let gap: string = "10px";
 
   let bgColor: string = "transparent";
+  let iconsSize: number = 80;
   let myStack: Icon[] = [];
 
   // The styles needs to be inline to have them on copied html
   $: styles = {
     "background-color": bgColor,
-    resize: "vertical",
     overflow: "auto",
     "min-height": "200px",
     padding: "10px",
@@ -49,8 +48,13 @@
   onDestroy(unsubscribe);
 </script>
 
-<fieldset class="hstack f-wrap">
-  <div class="hstack f-ai-center m-0 f-wrap">
+<form
+  class="hstack f-wrap"
+  on:submit={(e) => {
+    e.preventDefault();
+  }}
+>
+  <fieldset class="hstack f-ai-center m-0 f-wrap">
     <label for="bgcolor">Bg color:</label>
     <input id="bgcolor" bind:value={bgColor} placeholder={bgColor} />
     <input
@@ -59,13 +63,22 @@
       bind:value={bgColor}
       placeholder={bgColor}
     />
-  </div>
+  </fieldset>
+  <fieldset>
+    <input
+      id="icon-size"
+      bind:value={iconsSize}
+      placeholder="Icon size"
+      type="number"
+      class="w-min-content small-input"
+    />
+  </fieldset>
   <div class="hstack m-0 f-wrap">
     <button class="outline" on:click={clearTechStack}>Clean stack</button>
     <!-- <button class="outline" on:click={renderBanner}>Get</button> -->
     <button class="outline" on:click={copyHtml}>Copy raw html</button>
   </div>
-</fieldset>
+</form>
 
 <div
   id="techstackify"
@@ -85,5 +98,10 @@
   .gen-stack {
     border-color: var(--app-bg-dark);
     margin-bottom: var(--h-gap);
+    resize: vertical;
+  }
+
+  .small-input {
+    width: 80px;
   }
 </style>
