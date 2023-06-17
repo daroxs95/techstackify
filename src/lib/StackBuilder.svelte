@@ -20,7 +20,7 @@
     if (!filterManually)
       filteredTechs = techs.filter(
         (t) =>
-          t.name.includes(query) &&
+          (t.name.includes(query) || t.tags.includes(query)) &&
           (!selectedVersion || t.versions.svg.includes(selectedVersion))
       );
   }
@@ -29,7 +29,7 @@
     e.preventDefault();
     filteredTechs = techs.filter(
       (t) =>
-        t.name.includes(query) &&
+        (t.name.includes(query) || t.tags.includes(query)) &&
         (!selectedVersion || t.versions.svg.includes(selectedVersion))
     );
   };
@@ -50,6 +50,15 @@
 <div class="vstack">
   <form class="hstack f-wrap" on:submit={filterTechs} autocomplete="on">
     <input placeholder="Search" bind:value={query} />
+    <fieldset class="hstack f-ai-center m-0 f-wrap">
+      <label>Sort by:</label>
+      <select bind:value={selectedVersion}>
+        <option id="no-option" value="">Name</option>
+        {#each versions as option}
+          <option id={option} value={option}>{humanizeText(option)}</option>
+        {/each}
+      </select>
+    </fieldset>
     {#if filterManually}
       <button type="submit">Search</button>
     {/if}
