@@ -16,23 +16,21 @@
   let query: string = "";
   let selectedVersion: string = "";
 
-  $: {
-    if (!filterManually)
-      filteredTechs = techs.filter(
-        (t) =>
-          (t.name.includes(query) || t.tags.includes(query)) &&
-          (!selectedVersion || t.versions.svg.includes(selectedVersion))
-      );
-  }
-
-  const filterTechs = (e) => {
-    e.preventDefault();
-    filteredTechs = techs.filter(
+  const filterTechs = (techsArr: Icon[]) => {
+    return techsArr.filter(
       (t) =>
         (t.name.includes(query) || t.tags.includes(query)) &&
         (!selectedVersion || t.versions.svg.includes(selectedVersion))
     );
   };
+
+  const sortTechs = (techsArr: Icon[]) => {
+    return techsArr.sort((x, y) => x.name.localeCompare(y.name));
+  };
+
+  $: {
+    if (!filterManually) filteredTechs = filterTechs(techs);
+  }
 
   const unsubscribe = selectedStack.subscribe((value) => {
     myStack = value || [];
@@ -48,17 +46,15 @@
 </script>
 
 <div class="vstack">
-  <form class="hstack f-wrap" on:submit={filterTechs} autocomplete="on">
+  <form
+    class="hstack f-wrap"
+    on:submit={(e) => {
+      e.preventDefault();
+      filteredTechs = filterTechs(techs);
+    }}
+    autocomplete="on"
+  >
     <input placeholder="Search" bind:value={query} />
-    <fieldset class="hstack f-ai-center m-0 f-wrap">
-      <label>Sort by:</label>
-      <select bind:value={selectedVersion}>
-        <option id="no-option" value="">Name</option>
-        {#each versions as option}
-          <option id={option} value={option}>{humanizeText(option)}</option>
-        {/each}
-      </select>
-    </fieldset>
     {#if filterManually}
       <button type="submit">Search</button>
     {/if}
@@ -74,7 +70,7 @@
   </form>
 
   <div class="hstack f-wrap f-ai-center f-jc-center">
-    {#each filteredTechs as tech (`${tech.name}${selectedVersion}`)}
+    {#each sortTechs(filteredTechs) as tech (`${tech.name}${selectedVersion}`)}
       <li>
         <StackItem
           tech={{
