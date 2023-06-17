@@ -74,7 +74,9 @@
     />
   </fieldset>
   <div class="hstack m-0 f-wrap f-grow">
-    <button class="outline" on:click={clearTechStack}>Clean stack</button>
+    <button class="outline" on:click={() => clearTechStack()}
+      >Clean stack</button
+    >
     <!-- <button class="outline" on:click={renderBanner}>Get</button> -->
     <button class="outline" on:click={copyHtml}>Copy raw html</button>
     <div class="right-controls">

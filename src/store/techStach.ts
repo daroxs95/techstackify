@@ -18,7 +18,10 @@ export function deleteTechStackItemByName(name: string) {
   });
 }
 
-export function toggleTechStackItem(item: SelectedIcon, saveStack: boolean = false) {
+export function toggleTechStackItem(
+  item: SelectedIcon,
+  saveStack: boolean = false
+) {
   selectedStack.update((prevItems) => {
     const items = prevItems || [];
     const index = items.findIndex((i) => i.name === item.name);
@@ -29,9 +32,9 @@ export function toggleTechStackItem(item: SelectedIcon, saveStack: boolean = fal
   });
 }
 
-export function clearTechStack() {
+export function clearTechStack(clearSaved: boolean = false) {
   selectedStack.update(() => []);
-  clearSavedStack();
+  if (clearSaved) clearSavedStack();
 }
 
 // Local storage logic

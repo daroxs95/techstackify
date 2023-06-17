@@ -17,7 +17,7 @@
   let query: string = "";
   let selectedVersion: string = "";
 
-  const filterTechs = (techsArr: Icon[]) => {
+  const filterTechs = (query: string, techsArr: Icon[]) => {
     return techsArr.filter(
       (t) =>
         (t.name.includes(query) || t.tags.includes(query)) &&
@@ -30,7 +30,7 @@
   };
 
   $: {
-    if (!filterManually) filteredTechs = filterTechs(techs);
+    if (!filterManually) filteredTechs = filterTechs(query, techs);
   }
 
   const urlParams = new URLSearchParams(window.location.search);
@@ -60,7 +60,7 @@
     class="hstack f-wrap"
     on:submit={(e) => {
       e.preventDefault();
-      filteredTechs = filterTechs(techs);
+      filteredTechs = filterTechs(query, techs);
     }}
     autocomplete="on"
   >
