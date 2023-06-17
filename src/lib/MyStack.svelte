@@ -8,6 +8,8 @@
   import { onDestroy } from "svelte";
   import { getStyleString } from "../utils/styles";
   import StackItem from "./StackItem.svelte";
+  import shareHandler from "../utils/share";
+  import { selectedIcon2Minimal, selectedIconFromMinimal } from "./modules/TechIcons/utils";
 
   export let gap: string = "10px";
 
@@ -71,14 +73,27 @@
     <button class="outline" on:click={clearTechStack}>Clean stack</button>
     <!-- <button class="outline" on:click={renderBanner}>Get</button> -->
     <button class="outline" on:click={copyHtml}>Copy raw html</button>
-    <button
-      class="save-btn stealth material-symbols-outlined"
-      on:click={() => {
-        setSavedStack(myStack);
-      }}
-    >
-      save
-    </button>
+    <div class="right-controls">
+      <button
+        class="stealth material-symbols-outlined"
+        on:click={() => {
+          shareHandler(
+            "Take a look at my techstack",
+            `?stack=${JSON.stringify(myStack.map(selectedIcon2Minimal))}`
+          );
+        }}
+      >
+        share
+      </button>
+      <button
+        class=" stealth material-symbols-outlined"
+        on:click={() => {
+          setSavedStack(myStack);
+        }}
+      >
+        save
+      </button>
+    </div>
   </div>
 </form>
 
@@ -117,7 +132,7 @@
     width: 80px;
   }
 
-  .save-btn {
+  .right-controls {
     margin-left: auto;
   }
 </style>

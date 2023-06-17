@@ -5,6 +5,7 @@
   import { selectedStack } from "../store/techStach";
   import StackItem from "./StackItem.svelte";
   import { humanizeText } from "../utils/text";
+  import { selectedIconFromMinimal } from "./modules/TechIcons/utils";
 
   export let filterManually: boolean = false;
 
@@ -32,6 +33,9 @@
     if (!filterManually) filteredTechs = filterTechs(techs);
   }
 
+  const urlParams = new URLSearchParams(window.location.search);
+  const stackQuery = urlParams.get("stack");
+
   const unsubscribe = selectedStack.subscribe((value) => {
     myStack = value || [];
   });
@@ -41,6 +45,12 @@
     versions = versionsFromApi;
     // selectedVersion = versions[0];
     filteredTechs = techs = list;
+
+    if (stackQuery) {
+      selectedStack.update(() =>
+        JSON.parse(stackQuery).map((i) => selectedIconFromMinimal(i, techs))
+      );
+    }
   });
   onDestroy(unsubscribe);
 </script>

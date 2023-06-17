@@ -19,3 +19,8 @@ export interface SelectedIcon {
   aliases: any[];
   selectedVersion: string;
 }
+
+export interface SelectedIconMinimal {
+  name: string;
+  selectedVersion: string;
+}
