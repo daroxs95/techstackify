@@ -9,7 +9,11 @@
   import { getStyleString } from "../utils/styles";
   import StackItem from "./StackItem.svelte";
   import shareHandler from "../utils/share";
-  import { selectedIcon2Minimal, selectedIconFromMinimal } from "./modules/TechIcons/utils";
+  import {
+    selectedIcon2Minimal,
+    selectedIconFromMinimal,
+  } from "./modules/TechIcons/utils";
+  import Help from "./modules/Help.svelte";
 
   export let gap: string = "10px";
 
@@ -86,6 +90,15 @@
         share
       </button>
       <button
+        class="stealth material-symbols-outlined"
+        on:click={() => {
+          // @ts-ignore
+          window.helpDialog.showModal();
+        }}
+      >
+        help
+      </button>
+      <button
         class=" stealth material-symbols-outlined"
         on:click={() => {
           setSavedStack(myStack);
@@ -96,6 +109,21 @@
     </div>
   </div>
 </form>
+
+<dialog id="helpDialog" class="fade-in">
+  <div class="right-controls w-min-content">
+    <button
+      class=" stealth material-symbols-outlined"
+      on:click={() => {
+        // @ts-ignore
+        window.helpDialog.close();
+      }}
+    >
+      close
+    </button>
+  </div>
+  <Help />
+</dialog>
 
 <div
   id="techstackify"
