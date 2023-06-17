@@ -18,13 +18,13 @@ export function deleteTechStackItemByName(name: string) {
   });
 }
 
-export function toggleTechStackItem(item: SelectedIcon) {
+export function toggleTechStackItem(item: SelectedIcon, saveStack: boolean = false) {
   selectedStack.update((prevItems) => {
     const items = prevItems || [];
     const index = items.findIndex((i) => i.name === item.name);
     if (index !== -1) items.splice(index, 1);
     else items.push(item);
-    setSavedStack(items);
+    if (saveStack) setSavedStack(items);
     return items;
   });
 }

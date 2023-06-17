@@ -1,6 +1,10 @@
 <script lang="ts">
   import type { SelectedIcon } from "./modules/TechIcons/types";
-  import { clearTechStack, selectedStack } from "../store/techStach";
+  import {
+    clearTechStack,
+    selectedStack,
+    setSavedStack,
+  } from "../store/techStach";
   import { onDestroy } from "svelte";
   import { getStyleString } from "../utils/styles";
   import StackItem from "./StackItem.svelte";
@@ -22,17 +26,6 @@
     "align-items": "center",
     "justify-content": "center",
   };
-  const ulStyles = {
-    gap,
-    margin: 0,
-    display: "flex",
-    "flex-wrap": "wrap",
-    "align-items": "center",
-    "justify-content": "center",
-    "list-style": "none",
-  };
-
-  const renderBanner = () => {};
 
   const copyHtml = () => {
     var node = document.getElementById("techstackify");
@@ -74,10 +67,18 @@
       class="w-min-content small-input"
     />
   </fieldset>
-  <div class="hstack m-0 f-wrap">
+  <div class="hstack m-0 f-wrap f-grow">
     <button class="outline" on:click={clearTechStack}>Clean stack</button>
     <!-- <button class="outline" on:click={renderBanner}>Get</button> -->
     <button class="outline" on:click={copyHtml}>Copy raw html</button>
+    <button
+      class="save-btn stealth material-symbols-outlined"
+      on:click={() => {
+        setSavedStack(myStack);
+      }}
+    >
+      save
+    </button>
   </div>
 </form>
 
@@ -86,7 +87,17 @@
   class="gen-stack border-1"
   style={getStyleString(styles)}
 >
-  <ul style={getStyleString(ulStyles)}>
+  <ul
+    style={getStyleString({
+      gap,
+      margin: 0,
+      display: "flex",
+      "flex-wrap": "wrap",
+      "align-items": "center",
+      "justify-content": "center",
+      "list-style": "none",
+    })}
+  >
     {#each myStack as tech}
       <li>
         <StackItem {tech} iconSize={iconsSize} />
@@ -104,5 +115,9 @@
 
   .small-input {
     width: 80px;
+  }
+
+  .save-btn {
+    margin-left: auto;
   }
 </style>
