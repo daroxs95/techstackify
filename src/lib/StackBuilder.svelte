@@ -65,7 +65,7 @@
   </form>
 
   <div class="hstack f-wrap f-ai-center f-jc-center">
-    {#each filteredTechs as tech}
+    {#each filteredTechs as tech (`${tech.name}${selectedVersion}`)}
       <li>
         <StackItem
           tech={{
@@ -74,11 +74,24 @@
               ? selectedVersion
               : tech.versions.svg[0],
           }}
-          isSelected={myStack.findIndex((i) => i.name === tech.name) !== -1}
-          className="p-def f-ai-center f-jc-center"
+          className="p-def f-ai-center f-jc-center border-1 border-r-1 hoverable"
+          styles={{
+            "border-color":
+              myStack.findIndex((i) => i.name === tech.name) === -1 &&
+              "transparent",
+          }}
           iconSize={80}
         />
       </li>
     {/each}
   </div>
 </div>
+
+<style>
+  :global(.hoverable) {
+    transition: border-color 0.3s;
+  }
+  :global(.hoverable:hover) {
+    border-color: var(--color-primary-light) !important;
+  }
+</style>
