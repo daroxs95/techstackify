@@ -18,6 +18,7 @@ export interface SelectedIcon {
   color: string;
   aliases: any[];
   selectedVersion: string;
+  applyColorFilter?: boolean;
 }
 
 export interface SelectedIconMinimal {

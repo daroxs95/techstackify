@@ -1,4 +1,5 @@
 <script>
+  import { MY_NAME } from "../../../content/config";
   import MadeWith from "./MadeWith.svelte";
 
 </script>
@@ -13,10 +14,10 @@
       <i class="fa-brands fa-github font-icon-button" />
     </a>
   </div>
-  <!-- <div>
-    &copy; {today.getFullYear()}
+  <div>
+    &copy; 2023
     {MY_NAME}. Maybe some rights reserved.
-  </div> -->
+  </div>
 </footer>
 
 <style>
@@ -25,6 +26,6 @@
     text-align: center;
   }
   .font-icon-button {
-    font-size: 80px;
+    font-size: 40px;
   }
 </style>

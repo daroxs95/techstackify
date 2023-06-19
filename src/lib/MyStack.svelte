@@ -14,18 +14,20 @@
     selectedIconFromMinimal,
   } from "./modules/TechIcons/utils";
   import Help from "./modules/Help.svelte";
+  import { stripClassNames } from "../utils/html";
 
   export let gap: string = "10px";
 
   let bgColor: string = "transparent";
   let iconsSize: number = 80;
+  let useColorFilter: boolean = false;
   let myStack: SelectedIcon[] = [];
 
   // The styles needs to be inline to have them on copied html
   $: styles = {
     "background-color": bgColor,
     overflow: "auto",
-    "min-height": "200px",
+    height: "200px",
     padding: "10px",
     display: "flex",
     "flex-wrap": "wrap",
@@ -36,7 +38,7 @@
   const copyHtml = () => {
     var node = document.getElementById("techstackify");
     navigator.clipboard
-      .writeText(node?.outerHTML)
+      .writeText((<Element>stripClassNames(node))?.outerHTML)
       .then(() => alert("Html copied to clipboard"))
       .catch(() => alert("Sorry, could'nt copy html to clipboard"));
   };
@@ -63,8 +65,8 @@
       placeholder={bgColor}
     />
   </fieldset>
-  <fieldset>
-    <label for="bgcolor">Icon size:</label>
+  <fieldset class="hstack f-ai-center m-0 f-wrap">
+    <label for="icon-size">Icon size:</label>
     <input
       id="icon-size"
       bind:value={iconsSize}

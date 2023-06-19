@@ -16,6 +16,7 @@
   let myStack: Icon[] = [];
   let query: string = "";
   let selectedVersion: string = "";
+  let useColorFilter: boolean = false;
 
   const filterTechs = (query: string, techsArr: Icon[]) => {
     return techsArr.filter(
@@ -77,6 +78,16 @@
         {/each}
       </select>
     </fieldset>
+    <fieldset class="hstack f-ai-center m-0 f-wrap">
+      <label for="use-color-filter">Use color filter:</label>
+      <input
+        id="use-color-filter"
+        bind:checked={useColorFilter}
+        placeholder="Icon size"
+        type="checkbox"
+        class="w-min-content"
+      />
+    </fieldset>
   </form>
 
   <div class="hstack f-wrap f-ai-center f-jc-center">
@@ -88,6 +99,7 @@
             selectedVersion: tech.versions.svg.includes(selectedVersion)
               ? selectedVersion
               : tech.versions.svg[0],
+            applyColorFilter: useColorFilter,
           }}
           className="p-def f-ai-center f-jc-center border-1 border-r-1 hoverable"
           styles={{

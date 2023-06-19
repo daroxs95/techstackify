@@ -3,6 +3,7 @@
   import { toggleTechStackItem } from "../store/techStach";
   import { getSvgUrl } from "./modules/TechIcons/utils";
   import { getStyleString } from "../utils/styles";
+  import { hexToCSSFilter } from "hex-to-css-filter";
 
   export let iconSize: number = 60;
   export let className: string = "";
@@ -10,6 +11,7 @@
   export let styles: Record<string, string> = {};
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
   on:click={() => toggleTechStackItem(tech)}
   class={`${className}`}
@@ -23,6 +25,10 @@
     height={iconSize}
     style={getStyleString({
       "aspect-ratio": "1",
+      filter:
+        tech.applyColorFilter && tech.selectedVersion.includes("plain")
+          ? `brightness(0) saturate(100%) ${hexToCSSFilter(tech.color).filter}`
+          : "none",
     })}
   />
 </div>
