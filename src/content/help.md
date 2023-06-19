@@ -6,7 +6,11 @@
 - [ ] Canvas rendering mode (and image download)
 - [ ] Save stack config (icon size, colors, etc)
 - [ ] Add stack history
-- [ ] ~Share functionality (BAREBONES)~ ✅
+- [x] ~Share functionality (BAREBONES)~ ✅
+- [ ] Export html with embebed svg
+- [ ] Export html with no app classes
+- [ ] Add gradient style option to stack panel's background (And/or predefined shapes)
+- [ ] Add sort, reordering and randomization options to stack panel
 
 ### Used stack
 - Tech stack used to build the site and main assets storage method is not in planes to change whatsoever.
