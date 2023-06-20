@@ -6,6 +6,7 @@
   import StackItem from "./StackItem.svelte";
   import { humanizeText } from "../utils/text";
   import { selectedIconFromMinimal } from "./modules/TechIcons/utils";
+  import { hexToCSSFilter } from "hex-to-css-filter";
 
   export let filterManually: boolean = false;
 
@@ -17,6 +18,8 @@
   let query: string = "";
   let selectedVersion: string = "";
   let useColorFilter: boolean = false;
+  let colorFilter: string = "";
+  let preCalcColorFilter: string = "";
 
   const filterTechs = (query: string, techsArr: Icon[]) => {
     return techsArr.filter(
@@ -40,6 +43,10 @@
   const unsubscribe = selectedStack.subscribe((value) => {
     myStack = value || [];
   });
+
+  $: {
+    preCalcColorFilter = colorFilter ? hexToCSSFilter(colorFilter).filter : "";
+  }
 
   onMount(async () => {
     const { list, versions: versionsFromApi } = await getTechIcons();
@@ -88,6 +95,23 @@
         class="w-min-content"
       />
     </fieldset>
+    {#if useColorFilter}
+      <fieldset class="hstack f-ai-center m-0 f-wrap">
+        <!-- <label for="colorFilter">Custom color:</label> -->
+        <input
+          id="colorFilter"
+          class="medium-input"
+          bind:value={colorFilter}
+          placeholder={colorFilter || "Custom color"}
+        />
+        <input
+          id="colorFilter"
+          type="color"
+          bind:value={colorFilter}
+          placeholder={colorFilter}
+        />
+      </fieldset>
+    {/if}
   </form>
 
   <div class="hstack f-wrap f-ai-center f-jc-center">
@@ -100,6 +124,7 @@
               ? selectedVersion
               : tech.versions.svg[0],
             applyColorFilter: useColorFilter,
+            customColor: colorFilter,
           }}
           className="p-def f-ai-center f-jc-center border-1 border-r-1 hoverable"
           styles={{
@@ -108,6 +133,7 @@
               "transparent",
           }}
           iconSize={80}
+          overrideColorFilter={preCalcColorFilter}
         />
       </li>
     {/each}

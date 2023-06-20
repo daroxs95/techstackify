@@ -21,7 +21,6 @@
 
   let bgColor: string = "transparent";
   let iconsSize: number = 80;
-  let useColorFilter: boolean = false;
   let myStack: SelectedIcon[] = [];
 
   // The styles needs to be inline to have them on copied html
@@ -58,7 +57,12 @@
 >
   <fieldset class="hstack f-ai-center m-0 f-wrap">
     <label for="bgcolor">Bg color:</label>
-    <input id="bgcolor" bind:value={bgColor} placeholder={bgColor} />
+    <input
+      id="bgcolor"
+      class="medium-input"
+      bind:value={bgColor}
+      placeholder={bgColor}
+    />
     <input
       id="bgcolor"
       type="color"
@@ -160,10 +164,6 @@
     border-color: var(--app-bg-dark);
     margin-bottom: var(--h-gap);
     resize: vertical;
-  }
-
-  .small-input {
-    width: 80px;
   }
 
   .right-controls {

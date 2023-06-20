@@ -11,7 +11,7 @@
 - [ ] Export html with embebed svg
 - [x] ~Export html with no app classes~ ✅
 - [ ] Add gradient style option to stack panel's background (And/or predefined shapes)
-- [ ] Add sort, reordering and randomization options to stack panel
+- [ ] Add sort, reordering and ~randomization~ options to stack panel
 - [ ] Hydrate tech icons with metadata (website, etc)
 
 ### Used stack

@@ -9,6 +9,19 @@
   export let className: string = "";
   export let tech: SelectedIcon;
   export let styles: Record<string, string> = {};
+  // This is to avoid wasting cpu computing the same value over and over, mainly to override this in StackBuilder component
+  export let overrideColorFilter: string = "";
+
+  $: cssFilter = (() => {
+    if (!tech.applyColorFilter) return "none";
+    if (overrideColorFilter)
+      return `brightness(0) saturate(100%) ${overrideColorFilter}`;
+    // if (tech.selectedVersion.includes("plain"))
+    if (!tech.customColor && !tech.color) return "none";
+    return `brightness(0) saturate(100%) ${
+      hexToCSSFilter(tech.customColor || tech.color).filter
+    }`;
+  })();
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -25,10 +38,7 @@
     height={iconSize}
     style={getStyleString({
       "aspect-ratio": "1",
-      filter:
-        tech.applyColorFilter && tech.selectedVersion.includes("plain")
-          ? `brightness(0) saturate(100%) ${hexToCSSFilter(tech.color).filter}`
-          : "none",
+      filter: cssFilter,
     })}
   />
 </div>
