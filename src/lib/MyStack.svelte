@@ -15,6 +15,7 @@
   } from "./modules/TechIcons/utils";
   import Help from "./modules/Help.svelte";
   import { stripClassNames } from "../utils/html";
+  import RandomizeButton from "./modules/RandomizeButton.svelte";
 
   export let gap: string = "10px";
 
@@ -82,6 +83,7 @@
     <!-- <button class="outline" on:click={renderBanner}>Get</button> -->
     <button class="outline" on:click={copyHtml}>Copy raw html</button>
     <div class="right-controls">
+      <RandomizeButton />
       <button
         class="stealth material-symbols-outlined"
         on:click={() => {
