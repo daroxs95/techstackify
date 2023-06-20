@@ -97,12 +97,11 @@
     </fieldset>
     {#if useColorFilter}
       <fieldset class="hstack f-ai-center m-0 f-wrap">
-        <!-- <label for="colorFilter">Custom color:</label> -->
         <input
           id="colorFilter"
           class="medium-input"
           bind:value={colorFilter}
-          placeholder={colorFilter || "Custom color"}
+          placeholder={colorFilter || "Custom"}
         />
         <input
           id="colorFilter"
