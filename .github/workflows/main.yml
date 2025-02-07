@@ -22,9 +22,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
-          cache: 'yarn'
-      - run: yarn
-      - run: yarn build
+          cache: 'npm'
+      - run: npm i
+      - run: npm run build
       - name: Deploy to techstackify.surge.sh
         uses: dswistowski/surge-sh-action@v1
         with:

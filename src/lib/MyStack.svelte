@@ -36,9 +36,9 @@
   };
 
   const copyHtml = () => {
-    var node = document.getElementById("techstackify");
+    const node = document.getElementById("techstackify");
     navigator.clipboard
-      .writeText((<Element>stripClassNames(node))?.outerHTML)
+      .writeText((stripClassNames(node) as Element)?.outerHTML)
       .then(() => alert("Html copied to clipboard"))
       .catch(() => alert("Sorry, could'nt copy html to clipboard"));
   };
